@@ -1,16 +1,12 @@
-import exceptions.Account;
-import exceptions.InsufficientFundsException;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-       var account = new Account();
-        try {
-            account.withdraw(10);
-        } catch (InsufficientFundsException e) {
-            System.out.println(e.getMessage());
-        }
+       List<Integer> list = new ArrayList<>();
+       list.add(2);
+       list.add(10);
+       list.add(1);
+
+        System.out.println(list);
     }
 }
