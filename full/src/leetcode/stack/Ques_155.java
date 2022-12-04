@@ -18,7 +18,7 @@ public class Ques_155 {
 
     public Ques_155(){
         stack = new Stack<>();
-        minStack = new Stack();
+        minStack = new Stack<>();
     }
 
     public void push(int val){
