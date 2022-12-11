@@ -1,5 +1,6 @@
 package com.example.init.customer;
 
+import com.example.init.exception.ApiRequestException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,13 @@ public class CustomerController {
     @GetMapping("/{customerId}")
     public Customer  getCustomer(@PathVariable("customerId") Long id){
         return customerService.getCustomer(id);
+    }
+
+    @GetMapping("/{customerId}/exception")
+    public Customer  getCustomerException(@PathVariable("customerId") Long id){
+        throw  new ApiRequestException(
+                "api request exception for customer"
+        );
     }
 
     @PostMapping("/")
