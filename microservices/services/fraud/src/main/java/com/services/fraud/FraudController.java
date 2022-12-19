@@ -1,5 +1,6 @@
 package com.services.fraud;
 
+import com.services.clients.fraud.FraudCheckResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
