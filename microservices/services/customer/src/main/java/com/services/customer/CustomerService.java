@@ -1,11 +1,25 @@
 package com.services.customer;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+@AllArgsConstructor
 @Service
-public record CustomerService(CustomerRepository customerRepository) {
+public class CustomerService{
+
+    private CustomerRepository customerRepository;
+    private RestTemplate restTemplate;
     public void registerCustomer(CustomerRegistrationRequest request){
         Customer customer = Customer.builder().firstName(request.firstName()).lastName(request.lastName()).email(request.email()).build();
-        customerRepository.save(customer);
+        customerRepository.saveAndFlush(customer);
+
+        FraudCheckResponse response = restTemplate.getForObject("http://fraud/api/v1/fraud-check/{customerId}/", FraudCheckResponse.class, customer.getId());
+
+        if(response.isFraudster()){
+            throw new IllegalStateException("fraudster");
+        }
+
+
     }
 }
